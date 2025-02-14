@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-ring: var(--color-blue-300)
+}
