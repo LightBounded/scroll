@@ -5,7 +5,7 @@
 
 	const { data }: PageProps = $props();
 
-	const players = $state<string[]>([]);
+	let players = $state<string[]>([]);
 	$inspect(players);
 
 	onMount(() => {
@@ -17,9 +17,11 @@
 			const payload = event.data;
 			const json: WSGameMessage = JSON.parse(payload);
 
-			console.log('Received message', json);
-
 			switch (json.event) {
+				case 'lobbyState': {
+					players = json.players;
+					break;
+				}
 				case 'playerJoin': {
 					players.push(json.player);
 					break;
@@ -58,6 +60,10 @@
 
 		return () => {
 			// Close the connection when the component is destroyed
+			sendWSGameMessage(socket, {
+				event: 'playerLeave',
+				player: data.user.id
+			});
 			socket.close();
 		};
 	});
