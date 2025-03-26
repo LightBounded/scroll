@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 	import clsx from 'clsx';
+	import { cn } from '$lib';
 
 	const { data }: PageProps = $props();
 
@@ -82,7 +83,7 @@
 	<ul class="flex flex-col gap-4">
 		{#each players as player}
 			<li
-				class={clsx('h-96 rounded-md border border-gray-400 p-4', {
+				class={cn('h-96 rounded-md border border-gray-400 p-4', {
 					'border-blue-500 ring-2 ring-blue-500': player === data.user.id
 				})}
 			>

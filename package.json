@@ -36,7 +36,8 @@
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
-		"svelte-clerk": "^0.8.2"
+		"svelte-clerk": "^0.8.2",
+		"tailwind-merge": "^3.0.2"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
