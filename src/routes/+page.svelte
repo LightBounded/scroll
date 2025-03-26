@@ -92,7 +92,7 @@
 		{/each}
 	</ul>
 	<button
-		class="fixed right-0 bottom-4 left-0 mx-auto w-60 rounded-md bg-blue-500 px-4 py-3 font-bold text-white outline-none focus-within:ring-2 focus-within:ring-blue-300"
+		class="fixed right-0 bottom-4 left-0 mx-auto w-60 cursor-pointer rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors duration-200 outline-none focus-within:ring-2 focus-within:ring-blue-300 hover:bg-blue-500/90"
 		>Skip</button
 	>
 </main>
