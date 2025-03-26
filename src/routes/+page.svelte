@@ -2,18 +2,17 @@
 	import { sendWSGameMessage, type WSGameMessage } from '$lib/ws';
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
-	import clsx from 'clsx';
 	import { cn } from '$lib';
 
 	const { data }: PageProps = $props();
 
 	let players = $state<string[]>([]);
+	let currentPlayerPosition = $derived.by(() => players.indexOf(data.user.id));
 	$inspect(players);
 
-	onMount(() => {
-		// Establish a connection to the server
-		const socket = new WebSocket('ws://localhost:8080');
+	const socket = new WebSocket('ws://localhost:8080');
 
+	onMount(() => {
 		// Listen for messages
 		socket.addEventListener('message', function (event) {
 			const payload = event.data;
@@ -92,6 +91,18 @@
 		{/each}
 	</ul>
 	<button
+		onclick={() => {
+			// Get current players position
+
+			let nextPlayerPosition =
+				currentPlayerPosition + 1 >= players.length ? 0 : currentPlayerPosition + 1;
+
+			sendWSGameMessage(socket, {
+				event: 'playerSkip',
+				skipper: data.user.id,
+				skipped: players[nextPlayerPosition]
+			});
+		}}
 		class="fixed right-0 bottom-4 left-0 mx-auto w-60 cursor-pointer rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors duration-200 outline-none focus-within:ring-2 focus-within:ring-blue-300 hover:bg-blue-500/90"
 		>Skip</button
 	>
