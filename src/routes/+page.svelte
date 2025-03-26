@@ -77,7 +77,7 @@
 	});
 </script>
 
-<main class="mx-auto max-w-xl p-4">
+<main class="relative mx-auto max-w-xl p-4">
 	<h1 class="mb-2">Players</h1>
 	<ul class="flex flex-col gap-4">
 		{#each players as player}
@@ -90,4 +90,8 @@
 			</li>
 		{/each}
 	</ul>
+	<button
+		class="fixed right-0 bottom-4 left-0 mx-auto w-60 rounded-md bg-blue-500 px-4 py-3 font-bold text-white outline-none focus-within:ring-2 focus-within:ring-blue-300"
+		>Skip</button
+	>
 </main>
