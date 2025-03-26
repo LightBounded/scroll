@@ -35,7 +35,14 @@
 					break;
 				}
 				case 'playerSkip': {
-					// TODO: Implement
+					// Swap the positions of the skipper and player being skipped
+					const skipperIndex = players.indexOf(json.skipper);
+					const skippeeIndex = players.indexOf(json.skipped);
+					if (skipperIndex !== -1 && skippeeIndex !== -1) {
+						players[skipperIndex] = json.skipped;
+						players[skippeeIndex] = json.skipper;
+					}
+					break;
 				}
 			}
 		});
