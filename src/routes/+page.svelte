@@ -2,6 +2,7 @@
 	import { sendWSGameMessage, type WSGameMessage } from '$lib/ws';
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
+	import clsx from 'clsx';
 
 	const { data }: PageProps = $props();
 
@@ -69,11 +70,17 @@
 	});
 </script>
 
-<main>
-	<h1>Players</h1>
-	<ul>
+<main class="mx-auto max-w-xl p-4">
+	<h1 class="mb-2">Players</h1>
+	<ul class="flex flex-col gap-4">
 		{#each players as player}
-			<li>{player}</li>
+			<li
+				class={clsx('h-96 rounded-md border p-4', {
+					'border-blue-500 ring-2 ring-blue-500': player === data.user.id
+				})}
+			>
+				{player}
+			</li>
 		{/each}
 	</ul>
 </main>

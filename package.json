@@ -35,6 +35,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"clsx": "^2.1.1",
 		"svelte-clerk": "^0.8.2"
 	},
 	"pnpm": {

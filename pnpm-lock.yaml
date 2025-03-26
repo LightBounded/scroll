@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       svelte-clerk:
         specifier: ^0.8.2
         version: 0.8.2(react@19.0.0)(svelte@5.20.0)
