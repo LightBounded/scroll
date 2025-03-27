@@ -2,6 +2,6 @@
 	import { SignIn } from 'svelte-clerk';
 </script>
 
-<main>
+<main class="grid h-screen place-items-center">
 	<SignIn />
 </main>
