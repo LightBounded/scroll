@@ -3,6 +3,9 @@
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 	import { cn } from '$lib';
+	import { SignOutButton, useClerkContext } from 'svelte-clerk';
+	import { redirect } from '@sveltejs/kit';
+	import { goto } from '$app/navigation';
 
 	const { data }: PageProps = $props();
 
@@ -11,6 +14,8 @@
 	$inspect(players);
 
 	const socket = new WebSocket('ws://localhost:8080');
+
+	const clerkCtx = useClerkContext();
 
 	onMount(() => {
 		// Listen for messages
@@ -105,5 +110,17 @@
 		}}
 		class="fixed right-0 bottom-4 left-0 mx-auto w-60 cursor-pointer rounded-md bg-blue-500 px-4 py-3 font-bold text-white transition-colors duration-200 outline-none focus-within:ring-2 focus-within:ring-blue-300 hover:bg-blue-500/90"
 		>Skip</button
+	>
+	<button
+		onclick={async () => {
+			try {
+				await clerkCtx.clerk?.signOut();
+			} catch (e) {
+				if (e instanceof Error) alert(e.message);
+			}
+			goto('/sign-in');
+		}}
+		class="fixed top-4 right-4 mx-auto cursor-pointer rounded-md bg-blue-500 px-4 py-3 text-sm font-bold text-white transition-colors duration-200 outline-none focus-within:ring-2 focus-within:ring-blue-300 hover:bg-blue-500/90"
+		>Sign Out</button
 	>
 </main>
