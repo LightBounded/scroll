@@ -3,8 +3,7 @@
 	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
 	import { cn } from '$lib';
-	import { SignOutButton, useClerkContext } from 'svelte-clerk';
-	import { redirect } from '@sveltejs/kit';
+	import { useClerkContext } from 'svelte-clerk';
 	import { goto } from '$app/navigation';
 
 	const { data }: PageProps = $props();
@@ -13,11 +12,12 @@
 	let currentPlayerPosition = $derived.by(() => players.indexOf(data.user.id));
 	$inspect(players);
 
-	const socket = new WebSocket('ws://localhost:8080');
+	let socket: WebSocket;
 
 	const clerkCtx = useClerkContext();
 
 	onMount(() => {
+		socket = new WebSocket('ws://localhost:8080');
 		// Listen for messages
 		socket.addEventListener('message', function (event) {
 			const payload = event.data;
@@ -67,9 +67,9 @@
 		});
 
 		// Connection error
-		socket.addEventListener('error', function (event) {
-			console.log('Connection error');
-		});
+			socket.addEventListener('error', function (event) {
+				console.log('Connection error');
+			});
 
 		return () => {
 			// Close the connection when the component is destroyed
