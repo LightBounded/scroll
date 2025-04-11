@@ -24,3 +24,7 @@ You can preview the production build with `pnpm run preview`.
 
 Depending on where you want to deploy, install the appropiate 
 [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## AI Disclaimer
+
+We did occasionaly reference ChatGPT and Copilot for help as we were developing.
